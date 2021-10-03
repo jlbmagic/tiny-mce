@@ -1,3 +1,4 @@
+import react from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./style.css";
 import "regenerator-runtime/runtime.js";
@@ -10,13 +11,6 @@ window.loadEditor = function (data) {
   area.setAttribute("min-height", "300px");
   area.setAttribute("width", "50%");
   area.innerHTML = data;
-
-  const btn = document.createElement("button");
-  const createBtn = document.body.appendChild(btn);
-  createBtn.setAttribute("id", "btn");
-  createBtn.innerHTML = "SAVE";
-
-  createBtn.addEventListener("click", saveForm);
 
   tinymce.init({
     selector: "textarea",
@@ -73,8 +67,18 @@ window.loadEditor = function (data) {
 
     content_css: "default",
   });
+
+  const btn = document.createElement("button");
+  const createBtn = document.body.appendChild(btn);
+  createBtn.setAttribute("id", "btn");
+  createBtn.innerHTML = "SAVE";
+
+  createBtn.addEventListener("click", saveForm);
 };
 function saveForm() {
-  var theParam = tinyMCE.get("html").getContent();
-  FileMaker.PerformScriptWithOption("RTE-exit", theParam, 5);
+  var richText = tinyMCE.get("html").getContent();
+  var plainText = tinyMCE.get("html").getBody().textContent;
+
+  const obj = { richText, plainText };
+  FileMaker.PerformScriptWithOption("RTE-exit", JSON.stringify(obj), 5);
 }
