@@ -68,12 +68,12 @@ window.loadEditor = function (data) {
     content_css: "default",
   });
 
-  const btn = document.createElement("button");
-  const createBtn = document.body.appendChild(btn);
-  createBtn.setAttribute("id", "btn");
-  createBtn.innerHTML = "SAVE";
+  // const btn = document.createElement("button");
+  // const createBtn = document.body.appendChild(btn);
+  // createBtn.setAttribute("id", "btn");
+  // createBtn.innerHTML = "submit";
 
-  createBtn.addEventListener("click", saveForm);
+  // createBtn.addEventListener("click", saveForm);
 };
 function saveForm() {
   var richText = tinyMCE.get("html").getContent();
